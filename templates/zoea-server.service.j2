@@ -1,0 +1,17 @@
+[Unit]
+Description=Zoea Server ({{ instance_name }})
+After=network.target
+
+[Service]
+Type=simple
+User={{ run_user }}
+Group={{ run_group }}
+WorkingDirectory={{ working_directory }}
+EnvironmentFile={{ env_file }}
+ExecStart={{ exec_start }}
+Restart=always
+RestartSec=2
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+[project]
+name = "zoea-deploy"
+version = "0.1.0"
+description = "pyinfra deploys for Zoea on exe.dev"
+requires-python = ">=3.11"
+dependencies = [
+  "pyinfra>=3.5,<4",
+]
