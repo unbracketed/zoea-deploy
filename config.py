@@ -32,11 +32,15 @@ def q(value: Path | str) -> str:
 BUILD_DIR.mkdir(exist_ok=True)
 
 if BUILD_SERVER:
-    logger.info("Building zoea-server locally")
+    goos = os.getenv("ZOEA_DEPLOY_GOOS", "linux")
+    goarch = os.getenv("ZOEA_DEPLOY_GOARCH", "amd64")
+    logger.info(f"Building zoea-server locally (GOOS={goos} GOARCH={goarch})")
     SERVER_BUILD_DIR.mkdir(parents=True, exist_ok=True)
     local.shell(
-        "cd {src} && go build -o {out} ./cmd/server".format(
+        "cd {src} && env GOOS={goos} GOARCH={goarch} CGO_ENABLED=0 go build -o {out} ./cmd/server".format(
             src=q(SERVER_DIR),
+            goos=q(goos),
+            goarch=q(goarch),
             out=q(SERVER_BINARY),
         )
     )
