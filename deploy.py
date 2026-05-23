@@ -92,6 +92,7 @@ server_working_dir = data("zoea_server_working_dir", "")
 pi_bin_path = data("zoea_pi_bin_path", "pi")
 
 web_root = data("zoea_web_root", pjoin(root_dir, "web", "current"))
+nginx_listen_port = int(data("zoea_nginx_listen_port", 80))
 nginx_site_name = data("zoea_nginx_site_name", f"zoea-{instance_name}")
 nginx_site_available = pjoin("/etc/nginx/sites-available", f"{nginx_site_name}.conf")
 nginx_site_enabled = pjoin("/etc/nginx/sites-enabled", f"{nginx_site_name}.conf")
@@ -285,6 +286,7 @@ nginx_site = files.template(
     api_upstream=api_upstream,
     web_enabled=web_enabled,
     web_root=web_root,
+    nginx_listen_port=nginx_listen_port,
 )
 
 nginx_site_link = files.link(
